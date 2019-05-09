@@ -1,0 +1,45 @@
+ <%= erb :header %>
+      <h2>Driver management</h2>
+      <% if flash[:error] %>
+        <p><%= flash[:error] %></p>
+        <% end%>
+      <form method="post" action="/drivers/add" class="user-form">
+         <h3>Add new driver</h3>
+         <input type="text" name="driver_name" placeholder="Driver name">
+         <input type="text" name="car_name" placeholder="Car name">
+         <input type="text" name="license_plate" placeholder="Licence place">
+         <br>Car Type:
+         <select name="car_type">
+            <% @car_types.each do |car_type| %>
+            <option value="<%= h car_type.name %>"><%= h car_type.name %></option>
+            <% end %>
+         </select>
+         <br>
+         <input type="submit" name="submit" value="SEND"/>
+      </form>
+      <div class="taxi-container">
+         <div class="pane">
+            <div class="header">
+               Driver management
+            </div>
+            <div class="content">
+               <% @drivers.each do |driver| %> 
+                
+               <div class="item">
+                  <%= h driver.status ? "FREE" : "BUSY" %> - CAR TYPE: <%= h driver.car_type.name %> - CAR NAME: <%= h driver.car_name %> - DRIVER: <%= h driver.name %> - LICENSE PLATE: <%= h driver.license_plate %>
+                  <div class="controls">
+                      
+                     <form method="POST" action="/drivers/delete">
+                        <input name="_method" type="hidden" value="delete" />
+                        <input type="hidden" id="driver_id" name="driver_id" value="<%= driver.id %>">
+                        <input type="submit" name="submit" value="DELETE"/>
+                     </form>
+                      
+                  </div>
+               </div>
+               <% end %>
+                
+            </div>
+         </div>
+      </div>
+ <%= erb :footer %>

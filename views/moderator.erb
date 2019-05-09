@@ -1,0 +1,177 @@
+ <%= erb :header %>
+
+    <h2>Moderator's page</h2>
+
+        <ul class="city-select">
+            <% @cities.each do |city| %>
+                <% if @current_city_id == city.id.to_s %>
+                    <li class="current"><a href="/moderator/?city=<%=city.id%>"><%= h city.name %></a></li>
+                <% else %>
+                    <li><a href="/moderator/?city=<%=city.id%>"><%= h city.name %></a></li>
+                <% end %>
+            <% end %>
+            <% if @current_city_id.nil? %>
+                <li class="current"><a href="/moderator/">Uncategorized</a></li>
+            <% else %>
+                <li><a href="/moderator/">Uncategorized</a></li>
+            <% end %>
+        </ul>
+
+        <div class="request-container">
+            <div class="pane">
+                <div class="header">
+                    Open requests
+                </div>
+                <div class="content">
+                  
+                    
+                    <!-- New Open Requests-->
+                    <% @new_requests.each do |request| %>
+                        <div class="item">
+                            <p><%= h request.twitter_username.username %></p><br>
+                            <p><%= h request.date.strftime('%F %T') %></p>
+    
+                            <div class="controls">
+                                
+                                <form method="get" action='/moderator/reserve_request' class="take_form" id="take_form">
+                                  <input type="hidden" id="tweet_id" name="tweet_id" value="<%= request.status_id %>"/>
+                                  <input type="submit" name="submit" value="TAKE"/>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    <% end %>
+                    
+                </div>
+                <form method="get" action='/moderator/update_requests'>
+                                  <input type="submit" name="submit" value="REFRESH"/>
+                       </form>
+            </div>
+            <div class="pane" id="request_pane">
+                <div class="header">
+                    My requests
+                </div>
+                <div class="content" id="myrequests">
+                    
+                    <!-- My Requests-->
+                    <% @my_requests.each do |request| %>
+                        <div class="item">
+                            <p class="requestname"><%= h request.twitter_username.username %><br></p>
+                            <%= h request.date.strftime('%F %T') %>
+                            
+                            <div class="controls">
+                                
+                                <!-- Select Request and pass tweet.id to controller to use it to display tweet conversation-->
+                                <form action="/moderator/<%= request.status_id %>" class="select_form">
+                                    <input type="submit" value="SELECT" />
+                                </form>
+                            
+                                <!-- tweet.id to controller to use it to close this Request-->
+                                <form action="/moderator/set_finished/<%= request.status_id %>">
+                                    <input type="submit" value="CLOSE" />
+                                </form>
+                                
+                                <form method="get" action='/moderator/unreserve_request'>
+                                  <input type="hidden" id="tweet_id" name="tweet_id" value="<%= request.status_id %>"/>
+                                  <input type="submit" name="submit" value="PUT BACK"/>
+                                </form>
+                            
+                            
+                            </div>
+                        </div>
+                    <% end %>
+                    
+                </div>
+            </div>
+            <div class="pane" id="conversation_pane">
+                <div class="header">
+                    Twitter conversation
+                </div>
+                <div class="content-conversation">
+                    <% if !@conversation_tweets.any? %>
+                        <p class="empty-message">Select a request first to see the conversation.</p>
+                    <% end %>
+                    
+                    <!-- Tweet Conversation -->
+                    <% @conversation_tweets.each do |tweet| %>
+                        <p class="tweet"><%= h tweet.text %></p>
+                    <% end %>
+
+                </div>
+                
+                <div class="reply">
+                    
+                    <!-- Form to tweet back to selected request -->
+                    <form method="post" action="/moderator/tweet_back">
+                        <% if @conversation_tweets.any? %>
+                            <input type="text" name="message" placeholder="Type your reply here...">
+                            <input type="hidden" id="reply_tweet_id" name="reply_to_id" value="<%= @conversation_id %>">
+                            <input type="hidden" id="reply_tweet_id" name="request_user_name" value="<%= h @request_user_name %>">
+                            <input type="submit" name="submit" value="SEND"/>
+                        <% else %>
+                            <input type="text" name="message" disabled />
+                           <input type="submit" name="submit" value="SEND" disabled>
+                        <% end %>
+                    </form>
+                    
+                </div>
+            </div>
+            <div class="pane" id="closedrequests">
+                <div class="header">
+                    Closed requests
+                </div>
+                <div class="content">
+                    
+                    <!-- Finished Requests-->
+                    <% @my_finished_requests.each do |request| %>
+                        <div class="item">
+                            <%= h request.twitter_username.username %><br>
+                            <%= h request.date.strftime('%F %T') %>
+                            
+
+                            <div class="controls">
+                                <form action="/moderator/<%= request.status_id %>">
+                                    <input type="submit" value="SELECT" />
+                                </form>
+                                <form action="/moderator/reopen/<%= request.status_id %>">
+                                    <input type="submit" value="REOPEN" />
+                                </form>
+                            </div>
+                        </div>
+                    <% end %>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="taxi-container">
+            <div class="pane">
+                <div class="header">
+                    Taxi management
+                </div>
+                <div class="content">
+                    <% @drivers.each do |driver| %> 
+                
+               <div class="item">
+                  <%= h driver.status ? "FREE" : "BUSY" %> - CAR TYPE: <%= h driver.car_type.name %> - CAR NAME: <%= h driver.car_name %> - DRIVER: <%= h driver.name %> - LICENSE PLATE: <%= h driver.license_plate %>
+                  <div class="controls">
+                     <% if driver.status %>
+                     <form method="post" action="/drivers/changeStatus" class="driver_status_form">
+                        <input type="hidden" id="driver_id" name="driver_id" value="<%= driver.id %>">
+                        <input type="submit" name="submit" value="Mark as Busy" class="busy_input"/>
+                     </form>
+                     <% else %>
+                     <form method="post" action="/drivers/changeStatus" class="driver_status_form">
+                        <input type="hidden" id="driver_id" name="driver_id" value="<%= driver.id %>">
+                        <input type="submit" name="submit" value="Mark as Free" class="free_input"/>
+                     </form>
+                     <% end %>
+                      
+                  </div>
+               </div>
+               <% end %>
+                </div>
+            </div>
+        </div>
+
+ <%= erb :footer %>

@@ -1,0 +1,194 @@
+html, body {
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    width: 100%;
+    padding: 30px;
+    background-color: #43484f;
+    color: #fff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+.request-container {
+    width: 100%;
+    display: table;
+    margin-bottom: 100px;
+}
+
+.taxi-container {
+    width: 50%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.taxi-container .item {
+    height: 70px;
+}
+
+.pane {
+    display: table-cell;
+    width: 25%;
+    height: 300px;
+}
+
+.header {
+    text-align: center;
+    background-color: #43484f;
+    color: #fff;
+    font-size: 22px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.content {
+    overflow-y: scroll;
+    width: 100%;
+    height: calc(100% - 48px);
+}
+
+.content-conversation {
+    overflow-y: scroll;
+    width: 100%;
+    height: calc(100% - 70px);
+    box-sizing: border-box;
+}
+
+.item {
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+}
+
+.taxi-container .item {
+    text-align: left;
+}
+
+.item:nth-child(even) {
+    background-color: #bbb;
+}
+
+.item .controls {
+    padding: 10px 10px 0px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.taxi-container .controls {
+    float: right;
+    width: auto;
+    padding: 0px;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.reply {
+    height: 22px;
+    background-color: #43484f;
+}
+
+.reply input {
+    height: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 60px);
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+.reply input[type="submit"] {
+    float: right;
+    height: 100%;
+    width: 60px;
+}
+
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 107px;
+}
+
+.tweet {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.tweet:nth-child(even) {
+    text-align: right;
+    background-color: #bbb;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+ul li {
+    display: inline-block;
+    padding-left: 20%;
+}
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px;
+}
+
+p.error {
+    font-size: 14px;
+    color: #cc0a27;
+    font-weight: bold;
+    text-align: center;
+}
+
+form.user-form {
+    text-align: center;
+}
+
+form.user-form input {
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+form.user-form input[type="text"], form.user-form input[type="email"], form.user-form input[type="password"] {
+    width: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+}
+
+form.user-form h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+ul.city-select {
+    font-size: 14px;
+    margin: 20px;
+    text-align: center;
+}
+
+ul.city-select li {
+    padding: 5px 20px 5px 20px;
+}
+
+ul.city-select li.current {
+    background-color: #43484f;
+}
+
+ul.city-select li.current a {
+    color: #fff;
+}

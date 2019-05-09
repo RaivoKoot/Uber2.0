@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link href="/style/index.css"
+      rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+        
+    </head>
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    	<nav class="navbar navbar-default navbar-fixed-top">
+    		<div class="container">
+    			<div class="navbar-header">
+    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+    					<span class="icon-bar"></span>
+    					<span class="icon-bar"></span>
+    					<span class="icon-bar"></span>
+    				</button>
+    				<a class="navbar-brand" href="#myPage">Logo</a>
+    			</div>
+    			<div class="collapse navbar-collapse" id="myNavbar">
+    				<ul class="nav navbar-nav navbar-right">
+    					<li><a href="#about">ABOUT</a></li>
+    					<li><a href="#rides">RIDES</a></li>
+    					<li><a href="#rewards">REWARDS</a></li>
+              
+              <% if not @logged_user.nil? and (@logged_user.role.name == "Moderator" or 
+                  @logged_user.role.name == "Admin") %>
+              <li><a href="/drivers">DRIVERS</a></li>         
+              <li><a href="/moderator/">MODERATOR</a></li>
+              <li><a href="/user">USERS</a></li>
+              <% end %>
+              
+              <li><a href="/cartypes">CAR TYPES</a></li>
+              <% if session[:logged_user_id].nil? %>
+    					<li><a href="/login">LOGIN</a></li>
+              <% else %>
+              <li><a href="/profile">PROFILE</a></li>
+              <li><a href="/logout">LOGOUT</a></li>
+              <% end %>
+              
+    				</ul>
+    			</div>
+    		</div>
+    	</nav>
+    	<div class="jumbotron text-center"> <!--Main Section, company name-->
+    		<h1>Tweet-a-Taxi</h1>
+    		<p> Taxi service based in Sheffield and Manchester</p>
+    	</div>
+<% if flash[:error] %>
+        <h1><%= flash[:error] %></h1>
+        <% end%>
+    	<!--About Us section-->
+    	<div id="about"class="container-fluid">
+    		<div class="row">
+    			<div class="col-sm-8">
+                    
+    				<h2>About Us</h2>
+    				<h4>Do you have a twitter account? Do you need a ride? Bored of the City Taxis and Ubers? </h4>
+    				<p>Then why don't you try Twitter Taxis?
+                		All you need to do is go to your twitter, and just tweet at us using <b>@ise19team25</b> and we will book you a ride! <br>
+                		There is no need to register making the process even more efficient! <br>
+                		However, if you do wish to gain rewards from this service, then a quick sign up is all it takes.
+                		You will be able to look at your past journeys, your profile and see your progress towards our reward scheme!
+            		</p>
+            <% if session[:logged_user_id].nil? %>
+                    <button class="btn btn-default btn-lg"><a href="/register">Register</a></button>
+            <% end %>
+            	</div>
+            	<div class="col-sm-4">
+            		<span class="material-icons logo">phonelink</span>
+            	</div>
+            </div>
+        </div>
+
+        <!--Car Types Section-->
+        <div id="rides" class="container-fluid bg-lightGrey text-center">
+        	<h2>Ways to Ride</h2>
+        	<h4>What we offer</h4>
+        	<br>
+        	<div class="row">
+        		<div class="col-sm-4">
+        			<span class="material-icons logo-small">directions_car</span>
+        			<h4><strong>NORMAL</strong></h4>
+        			<h4>1-4</h4>
+        			<p>Affordable, standard rides</p>
+        		</div>
+        		<div class="col-sm-4">
+        			<span class="material-icons logo-small">directions_car</span>
+        			<h4><strong>XL</strong></h4>
+        			<h4>1-6</h4>
+        			<p>Affordable, larger rides</p>
+        		</div>
+        		<div class="col-sm-4">
+        			<span class="material-icons logo-small">directions_car</span>
+        			<h4><strong>PREMIUM</strong></h4>
+        			<h4>1-4</h4>
+        			<p>Luxury, high-end rides</p>
+        		</div>
+        	</div>
+        </div>
+
+        <!--Bonus System Explaination-->
+        <div id="rewards" class="container-fluid">
+    		<div class="row">
+    			<div class="col-sm-8">
+    				<h2>Rewards</h2>
+                    <h2>Every ride gets you a point. At <%= @free_ride_threshold -1 %> points you get a free ride!</h2>
+            	</div>
+    			<div class="col-sm-4">
+            		<span class="material-icons logo">money</span>
+            	</div>
+            </div>
+        </div>
+
+        <!--Photo Carousel-->
+        <div class="container-fluid">
+        	<div id="carousel" class="carousel slide text-centre" data-ride="carousel">
+        		<!--Indicators-->
+        		<ol class="carousel-indicators">
+        			<li data-target="#myCarousel" data-slide-to="0"></li>
+        			<li data-target="#myCarousel" data-slide-to="1"></li>
+        			<li data-target="#myCarousel" data-slide-to="2"></li>
+        			<li data-target="#myCarousel" data-slide-to="4"></li>
+        		</ol>
+
+        		<!--Wrapper for slides-->
+        		<div class="carousel-inner" role="listbox">
+        			<div class="item active">
+        				<img src="images/Peaks.jpeg" alt="Sheffield Peak District">
+        			</div>
+		    		<div class="item">
+		    			<img src="images/Shef Roundabout.jpeg" alt="Roundabout near The University of Sheffield">
+		    		</div>
+		    		<div class="item">
+		    			<img src="images/Snowey Peaks.jpeg" alt="Snow on the Sheffield Peaks">
+		    		</div>
+	        		<div class="item">
+	        			<img src="images/Shef Train St.jpeg" alt="Sheffield's 'Cutting Edge' by Sheffield Station">
+	        		</div>
+	        	</div>
+	        </div>
+	    </div>
+
+	    <!--footer-->
+	    <footer class="container-fluid text-center">
+	    	<a href="#myPage" title="Scroll to top">
+	    		<span class="material-icons">arrow_drop_up</span>
+	    	</a>
+	    	<p>&copy; Tweet-a-Taxi, 2019</p>
+	    </footer>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

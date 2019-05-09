@@ -1,0 +1,104 @@
+.navbar {
+        		margin-bottom: 0;
+        		background-color: #11161E;
+        		z-index: 9999;
+        		border: 0;
+        		font-size: 12px !important;
+        		line-height: 1.42857143 !important;
+        		letter-spacing: 4px;
+        		border-radius: 0;
+        	}
+
+        	.navbar li a, .navbar .navbar-brand {
+        		color: #fff !important;
+        	}
+
+        	.navbar-nav li a:hover, .navbar-nav li.active a {
+        		color: #11161E !important;
+        		background-color: #E1E8ED !important;
+        	}
+
+        	.navbar-default .navbar-toggle {
+        		border-color: transparent;
+        		color: #fff !important;
+        	}
+
+        	.jumbotron {
+        		background-color:#11161E /* blue-black */;
+        		color: #E1E8ED /*extra light grey*/
+        	}
+
+        	.container-fluid {
+        		padding: 60px 50px;
+        	}
+
+        	.bg-black {
+        		background-color: pink;
+        	}
+
+        	.bg-lightGrey {
+        		background-color: #E5E9EC;
+        	}
+
+
+        	@media screen and (max-width: 768px) {
+        		.col-sm-4 {
+        			text-align: center;
+        			margin: 25px 0;
+        		}
+        	}
+
+        	.logo {
+        		font-size: 200px;
+        		color: #044652
+        	}
+
+        	.logo-small {
+        		font-size: 50px;
+        		color: #044652;
+        	}
+
+        	input[type=text], input[type=password] {
+        		width: 100%;
+        		padding: 12px 20px;
+        		margin: 8px 0;
+        		display: inline-block;
+        		border: 1px solid #ccc;
+        		box-sizing: border-box;
+        	}
+
+        	button {
+        		background-color: #11161E;
+        		color: #E1E8ED;
+        		padding: 14px 20px;
+        		margin: 8px 0;
+        		border: none;
+        		cursor: pointer;
+        		width: 100%;
+        	}
+
+        	button:hover {
+        		opacity: 0.7;
+        	}
+
+        	.carousel-indicators li {
+        		border-color: #E1E8ED;
+        	}
+
+        	.carousel-indicators li.active {
+        		background-color: #E1E8ED;
+        	}
+
+        	#carousel {
+        		padding: 0 10% 0 10%;
+        	}
+
+        	img {
+        		border-radius: 80px;
+        	}
+
+        	footer .material-icons {
+        		font-size: 70px;
+        		margin-bottom: 20px;
+        		color: #11161E;
+        	}

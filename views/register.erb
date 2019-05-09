@@ -1,0 +1,17 @@
+ <%= erb :header %>
+       
+      <h2>Registration</h2>
+      <% if flash[:error] %>
+        <p class="error"><%= flash[:error] %></p>
+        <% end%>
+      <p class="error"><%= session[:registration_error] %></p>
+       
+      <form method="post" action="/register" class="user-form">
+         <input type="email" name="email" placeholder="E-mail address">
+         <input type="text" name="name" placeholder="Your name">
+         <input type="password" name="password" placeholder="Password">
+         <input type="password" name="new_password_confirm" placeholder="Confirm password">
+         <input type="submit" name="submit" value="SEND"/>
+      </form>
+
+ <%= erb :footer %>

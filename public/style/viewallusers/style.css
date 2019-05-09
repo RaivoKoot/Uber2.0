@@ -1,0 +1,50 @@
+/* move header down from top of page, make font large */
+header {
+    padding-bottom: 4%;
+    font-size: 2.5em;
+}
+
+/* adds scrollbar to the first table */
+#userlist {
+    overflow-y: scroll;
+}
+
+/* sets dimensions for all divs that contain tables */
+.tablelist {
+    height: 200px;
+    width: 100%;
+}
+
+/* edits all links in tables to stay black */
+tr td a {
+    color: black;
+}
+
+/* edits all table headers font */
+.tableheader {
+    font-size: 1.5em;
+    color: black;
+    font-style: bold;
+}
+
+/* size footer and its contents, allign text, move footer to bottom of page */
+footer {
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* display the tables side by side */
+#rows {
+    display: flex;
+    flex-flow: row;
+}
+
+/* add spacing to the first and second table on the page 
+ * so the tables are seperated and don't touch eachother */
+#users, #information {
+    padding-right: 10%;
+}

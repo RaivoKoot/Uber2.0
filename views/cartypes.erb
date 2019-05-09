@@ -1,0 +1,66 @@
+ <%= erb :header %>
+        <% if flash[:error] %>
+        <p><%= flash[:error] %></p>
+        <% end%>
+
+        <% if not @logged_user.nil? and (@logged_user.role.name == "Moderator" or 
+                  @logged_user.role.name == "Admin") %>
+        <form method="post" action="/cartypes/add" enctype="multipart/form-data">
+             Car Type Name:<br>
+             <input type="text" name="cartype_name" />
+             <br>Car Type Description:<br>
+             <input type="text" name="description" />
+             <br>Car Type Image:<br>
+             <input type="file" name="file" />
+              <br>
+             <input type="submit" name="submit" value="Save"/>
+      </form>
+
+      <div class="taxi-container">
+         <div class="pane">
+            <div class="header">
+               Current Car Types
+            </div>
+            <div class="content">
+               <% @cartypes.each do |cartype| %> 
+               <div class="item">
+                  Name: <%= h cartype.name %> - Description: <%= h cartype.description %> - Displays on Site: <%= h cartype.active %>
+                  
+                   <% if cartype.active %>
+                   <form method="POST" action="/cartypes/deactivate">
+                        <input type="hidden" id="cartype_id" name="cartype_id" value="<%= cartype.id %>">
+                        <input type="submit" name="submit" value="Deactivate"/>
+                     </form>
+                     
+                       
+                     <% else %>
+                     <form method="POST" action="/cartypes/activate">
+                        <input type="hidden" id="cartype_id" name="cartype_id" value="<%= cartype.id %>">
+                        <input type="submit" name="submit" value="Activate"/>
+                     </form>
+                       
+                     <% end %>
+                   
+               </div>
+                
+               <% end %>
+            </div>
+         </div>
+      </div>
+
+       <% end %>
+
+        <div style ="margin-top: 100px"width = "100%" border = "0">
+                <% @cartypes.each do |cartype| %> 
+                <% if cartype.active %>
+                <div style ="text-align: center; margin: 20px">
+                    <img width = "65%" src = "images/<%= h cartype.image_name %>" alt = "Image of Cartype">
+                    <h2 style ="text-align: center"><%= h cartype.name %></h2>
+                    <h3 style ="text-align: center"><%= h cartype.description %></h2>
+                </div>
+                <% end %>
+                <% end %>
+        </div>
+
+
+ <%= erb :footer %>

@@ -1,0 +1,74 @@
+ <%= erb :header %>
+
+    <h2>View users</h2>
+
+      <div id="filter_form">
+        
+          <form method="get" action="/user" class="user-form">
+             <h3>Search by e-mail address</h3>
+              <input id="email_filter" type="text" name="email_filter" value="<%= h @email_filter%>" >
+              <br>
+              <h3>Search by name</h3>
+             <input id="name_filter" type="text" name="name_filter" value="<%= h @name_filter %>" >
+             <input type="submit" name="submit" value="Search for User"/>
+          </form>
+      </div>
+       
+      <div class="taxi-container">
+         <div class="pane">
+            <div class="header">
+               User Management
+            </div>
+            <div class="content">
+               <% @users.each do |user| %> 
+               <div class="item">
+                   
+                  E-Mail: <%= h user.email %> - Name: <%= h user.name %> - Role: <%= h user.role.name %>  - Blocked: <%= h user.blocked %>
+               
+                  
+                   <div class="controls">
+                       
+                     <% if user.blocked %>
+                     <form method="POST" action="/user/unblock">
+                        <input type="hidden" id="user_id" name="user_id" value="<%= user.id %>">
+                        <input type="submit" name="submit" value="Unblock"/>
+                     </form>
+                       
+                     <% elsif user.role.name == "User" %>
+                     <form method="POST" action="/user/block">
+                        <input type="hidden" id="user_id" name="user_id" value="<%= user.id %>">
+                        <input type="submit" name="submit" value="Block"/>
+                     </form>
+                       
+                     <% end %>
+                       
+                      <% if not @logged_user.nil? and @logged_user.role.name == "Admin" %>
+
+                     <% if user.role.name == 'User' %>
+                     <form method="POST" action="/user/promote">
+                        <input type="hidden" id="user_id" name="user_id" value="<%= user.id %>">
+                        <input type="submit" name="submit" value="Promote"/>
+                     </form>
+                       
+                     <% elsif user.role.name == 'Moderator' %>
+                     <form method="POST" action="/user/demote">
+                        <input type="hidden" id="user_id" name="user_id" value="<%= user.id %>">
+                        <input type="submit" name="submit" value="Demote"/>
+                     </form>
+                       
+                     <% end %>
+                     <% end %>
+                       
+                     <form method="POST" action="/user/give_free_ride">
+                        <input type="hidden" id="user_id" name="user_id" value="<%= user.id %>">
+                        <input type="submit" name="submit" value="Give Free Ride"/>
+                     </form>
+                      
+                       
+                  </div>
+               </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+ <%= erb :footer %>

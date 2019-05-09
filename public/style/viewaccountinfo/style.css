@@ -1,0 +1,79 @@
+/* move everything away from top part of page, and set text size for header */
+header {
+    padding-bottom: 4%;
+    font-size: 1.8em;
+    padding-left: 10%;
+}
+
+/* set text size for the header at the very top of the page to be bigger */
+#titleheader {
+    font-size: 2.5em;
+}
+
+/* size footer and its contents, allign text, move footer to bottom of page */
+footer {
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* hide checkbox for collapsible block */
+input[type='checkbox'] {
+	display: none;
+}
+
+/* style the label that is used to hide/show collapsible content, and the text-content inside it */
+.lbl-toggle, header + p, p, label {
+	font-size: 1.2em;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+}
+
+.collapsible-content {
+	/* hide collapsible content by default */
+	max-height: 0px; 
+	overflow: hidden;
+	/* set up transition to change size */
+	transition: max-height;
+}
+
+/* when a toggle box is checked, show the collapsible content below it */
+.toggle:checked + .lbl-toggle + .collapsible-content {
+	max-height: 5%;
+    margin-top: 1%;
+}
+
+/* add spacing from bottom and left to the collapsible and non-collapsible content */
+.collapsible-content-wrapper, .non-collapsible-content {
+	margin-bottom: 2%;
+    margin-left: 10%;
+}
+
+/* setup size of the box */
+.inputbox {
+    width: 30%;
+}
+
+/* setup allignment of submit button */
+#submitbutton {
+    width: 20%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+}
+
+/* setup font styling for error messages and success messages, 
+ * indent them to the right and space them out from eachother */
+.errormessage, .successmessage {
+    color: red;
+    font-size: 1.2em;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+/* override successmessage colour to be green */
+.successmessage {
+    color: green;
+}

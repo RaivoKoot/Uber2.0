@@ -1,0 +1,99 @@
+<%= erb :header %>
+   
+    <h2>Your profile</h2>
+
+   <body>
+       <% if flash[:error] %>
+        <h2><%= flash[:error] %></h2>
+        <% end%>
+      
+      <form method="POST" action="/user/change_email" class="user-form">
+          <h3>Edit e-mail address</h3>
+          Current E-Mail: <%= h @logged_user.email %><br>
+          <input type="email" name="new_email" value="<%= h @logged_user.email %>" >
+          <input type="submit" name="submit" value="Change E-Mail"/>
+      </form>
+      <br> 
+      
+      <form method="POST" action="/user/change_name" class="user-form">
+          <h3>Edit name</h3>
+          Current Name: <%= h @logged_user.name %><br>
+          <input type="text" name="new_name" value="<%= h @logged_user.name %>" >
+          <input type="submit" name="submit" value="Change Name"/>
+      </form>
+      
+      <br>
+      
+      <form method="POST" action="/user/change_password" class="user-form">
+          <h3>Edit password</h3>
+          <input type="password" name="old_password" placeholder="Old password">
+          <input type="password" name="new_password" placeholder="New password">
+          <input type="password" name="new_password_confirm" placeholder="Confirm new password">
+          <input type="submit" name="submit" value="Change Password"/>
+      </form>
+      <br>
+      <br>
+      <form action="/link_twitter" class="user-form">
+          <h3>Link new Twitter account</h3>
+         <button type="submit">Link New Twitter Account</button>
+      </form>
+      <br>
+      <br>
+      <div class="taxi-container">
+         <div class="pane">
+            <div class="header">
+               Your Twitter Accounts
+            </div>
+            <div class="content">
+               <% @twitter_usernames.each do |twitter_username| %> 
+               <div class="item">
+                   
+                  Twitter Name: <%= h twitter_username.username %>
+               
+                  
+                   <div class="controls">
+                    
+                     <form method="POST" action="/unlink_twitter_account" class="user-form">
+                        <input type="hidden" id="twitter_username_id" name="twitter_username_id" value="<%= twitter_username.id %>">
+                        <input type="submit" name="submit" value="Remove Twitter Account and linked Journeys from your Account"/>
+                     </form>
+                     
+                       
+                       
+                  </div>
+               </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+       
+       
+       
+      <div class="taxi-container">
+         <div class="pane">
+            <div class="header">
+               Your Journeys
+            </div>
+            <div class="content">
+               <% @journeys.each do |journey| %> 
+               <div class="item">
+                   
+                  Date: <%= h journey.date %> - Pickup Location: <%= h journey.pickup_location %> - Destination: <%= h journey.destination %>
+                  
+               </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+       
+      <h1 style="text-align: center; margin-top: 50px;">At <%= @free_ride_threshold -1 %> Points your next Ride will be Free!</h1>
+       <h2>Upon that ride <%= @free_ride_threshold - 1 %> points will be deducted</h2>
+       <h2>Each Ride gains you one point</h2>
+       <h2>Your current points: <%= @free_ride_points %>/<%= @free_ride_threshold - 1%></h2>
+       
+       
+       
+         
+   </body>
+
+ <%= erb :footer %>

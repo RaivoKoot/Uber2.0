@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" type="text/css" href="/style/reset.css">
+        <link rel="stylesheet" type="text/css" href="/style/style.css">
+
+        <title>Manage requests</title>
+        
+    </head>
+    <body>
+        <header>
+            <h1>Twitter Taxi App</h1>
+        </header>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cartypes">Car Types</a></li>
+            <% if session[:logged_user_id].nil? %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <% else %>
+            
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            
+            <% if not @logged_user.nil? and (@logged_user.role.name == "Moderator" or 
+                  @logged_user.role.name == "Admin") %>
+            <li><a href="/drivers">Drivers</a></li>
+            <li><a href="/moderator/">Moderator</a></li>
+            <li><a href="/user">Users</a></li>
+            <% end %>
+            
+            <% end %>
+
+        </ul>
+        
+       <hr />
+      

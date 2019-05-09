@@ -1,0 +1,32 @@
+ <%= erb :header %>
+<div class="pane">
+        <div class="content-conversation">
+                    <% if !@conversation_tweets.any? %>
+                        <p class="empty-message">Select a request first to see the conversation.</p>
+                    <% end %>
+                    
+                    <!-- Tweet Conversation -->
+                    <% @conversation_tweets.each do |tweet| %>
+                        <p class="tweet"><%= h tweet.text %></p>
+                    <% end %>
+
+        </div>
+</div>
+        <% if @has_free_ride %>
+        <h1 style="margin:10px;">THIS RIDE IS GOING TO BE FREE FOR THIS USER</h1>
+        <% end %>
+
+        <form method="post" action="/moderator/set_finished">
+            <input type="hidden" value="<%= @closing_request.status_id %>" name="request_id" />
+            
+            <label for="pickup_location">Pickup location  </label>
+            <input type="text" name="pickup_location" value="<%= h @closing_request.pickup_location %>" id="pickup_location" />
+            <br>
+            <label for="destination">Destination  </label>
+            <input type="text" name="destination" value="<%= h @closing_request.destination %>" id="destination" />
+            <br>
+            <input type="submit" value="CLOSE"/>
+        </form>
+
+
+ <%= erb :footer %>
